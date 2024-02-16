@@ -48,6 +48,7 @@ button {
   padding: 24px 0;
   font-size: 24px;
   border-radius: 9999px;
+  font-weight: 700;
 }
 
 .container {
@@ -55,7 +56,6 @@ button {
 }
 
 .row {
-
   width: 100%;
   max-width: 1200px;
   margin: 0 auto
