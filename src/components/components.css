@@ -1,0 +1,54 @@
+/* navbar */
+
+nav {
+    height: 80px;
+    display: flex;
+    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.05);
+    background-color: white;
+    position: relative;
+}
+
+.logo__img {
+    width: 50px;
+}
+
+.nav__container {
+    width: 100%;
+    max-width: 1200px;
+    padding: 0 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0 auto;
+}
+
+.nav__link {
+    text-decoration: none;
+    font-size: 20px;
+    font-weight: 900;
+    padding: 8px;
+    color: black;
+}
+
+.nav__link:hover {
+    color: #b49d75;
+
+}
+
+.nav__list {
+    margin-left: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+input {
+    width: 100%;
+}
+
+.searchbar__input {
+    max-width: 350px;
+    padding: 12px 20px;
+    border: 2px solid black;
+    border-radius: 9999px;
+}
