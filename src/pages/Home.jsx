@@ -1,6 +1,7 @@
 import "./pages.css";
 import Logo from "../assets/logo.webp";
-import { Link, useNavigate } from "react-router-dom";
+import HomeImage from "../assets/homeImage.jpg"
+import { useNavigate } from "react-router-dom";
 
 const Home = () => {
   const navigate = useNavigate();
@@ -10,7 +11,7 @@ const Home = () => {
         <div className="home__left">
           <img
             className="home__img"
-            src="https://images.pexels.com/photos/1640772/pexels-photo-1640772.jpeg?cs=srgb&dl=pexels-ella-olsson-1640772.jpg&fm=jpg"
+            src={HomeImage}
             alt=""
           />
         </div>
@@ -20,7 +21,6 @@ const Home = () => {
             <h1 className="home__right--slogan">
               We Publish Only the Best Popular Recipe For You!
             </h1>
-
             <button
               onClick={() => navigate("/categories")}
               className="btn home__btn"

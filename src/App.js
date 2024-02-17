@@ -5,17 +5,34 @@ import Recipes from "./pages/Recipes";
 import Recipe from "./pages/Recipe";
 import Categories from "./pages/Categories";
 import Nav from "./components/Nav";
+import { useEffect, useState } from "react";
+import RecipeService from "./service/service";
 
 function App() {
+
+  const [categories, setCategories] = useState([]);
+
+  const getRecipeCategories = async () => {
+    try {
+      const { categories } = await RecipeService.fetchRecipeCategories();
+      setCategories(categories);
+    } catch (error) {
+      console.error("Error getting recipe categories", error);
+    }
+  };
+  useEffect(() => {
+    getRecipeCategories();
+  }, []);
+
   return (
     <Router>
       <div className="App">
         <Nav />
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/categories/:name" element={<Recipes />} />
-          <Route path="/recipes:id" element={<Recipe />} />
-          <Route path="/categories" element={<Categories />} />
+          <Route path="/recipes/:name" element={<Recipes categories={categories} />} />
+          <Route path="/recipes/:name/:id" element={<Recipe />} />
+          <Route path="/categories" element={<Categories categories={categories}/>}/>
         </Routes>
       </div>
     </Router>
