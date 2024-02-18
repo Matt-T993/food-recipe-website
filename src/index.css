@@ -116,11 +116,16 @@ nav {
 input {
   width: 100%;
 }
+form{
+  width: 100%;
+  margin-left: 48px;
+}
 
 .searchbar__input {
-  max-width: 350px;
+  max-width: 450px;
   padding: 12px 20px;
   border: 2px solid black;
   border-radius: 9999px;
+
 }
 

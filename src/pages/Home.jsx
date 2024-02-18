@@ -25,7 +25,7 @@ const Home = () => {
               onClick={() => navigate("/categories")}
               className="btn home__btn"
             >
-              Find My Recipe
+              Find Recipes
             </button>
           </div>
         </div>

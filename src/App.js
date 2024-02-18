@@ -7,10 +7,14 @@ import Categories from "./pages/Categories";
 import Nav from "./components/Nav";
 import { useEffect, useState } from "react";
 import RecipeService from "./service/service";
+import SearchRecipes from "./pages/SearchRecipes";
 
 function App() {
 
   const [categories, setCategories] = useState([]);
+
+
+
 
   const getRecipeCategories = async () => {
     try {
@@ -33,6 +37,7 @@ function App() {
           <Route path="/recipes/:name" element={<Recipes categories={categories} />} />
           <Route path="/recipes/:name/:id" element={<Recipe />} />
           <Route path="/categories" element={<Categories categories={categories}/>}/>
+          <Route path="/search" element={<SearchRecipes categories={categories} />} />
         </Routes>
       </div>
     </Router>

@@ -267,5 +267,66 @@
   }
 
 
+@media (max-width: 768px) {
+    #home, .home__container, .recipe__content {
+      flex-direction: column;
+      height: auto;
+    }
+  
+    .home__left, .home__right, .recipe__content--left, .recipe__content--right {
+      width: 100%;
+    }
+  
+    .home__right--slogan, .category__name, .recipe__content--name {
+      font-size: 32px; 
+    }
+  
+    .category, .recipe {
+      width: calc(100% / 2); 
+    }
+    .recipe__card {
+        flex-direction: row; 
+        align-items: center; 
+      }
+    
+      .recipe__img {
+        width: 50%; 
+        border-radius: 0; 
+      }
+    
+      .recipe__name {
+        font-size: 14px;
+      }
+  }
+  
+  @media (max-width: 480px) {
+    .category, .recipe {
+      width: 100%; 
+    }
+  
+    .home__right--slogan, .category__name, .recipe__content--name {
+      font-size: 24px; 
+    }
+  
+    .category__choice {
+      width: calc(100% / 3); 
+  }
+  .recipe__card {
+    flex-direction: column; /* Stack image and name vertically on very small screens */
+  }
+
+  .recipe__img {
+    width: 100%; /* Image takes full width of the card */
+  }
+}
+
+
+  
+
+  
+
+
+
+
 
 
