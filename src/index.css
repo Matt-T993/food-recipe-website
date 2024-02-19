@@ -18,8 +18,8 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  /* background-color: #ffedf3; */
   background-color: #fff3e0;
+  overflow-x: hidden;
 }
 
 img {
@@ -39,7 +39,7 @@ li {
   list-style-type: none;
 }
 
-hr{
+hr {
   margin: 16px 0;
   height: 2px;
   background-color: black;
@@ -48,15 +48,26 @@ hr{
 
 
 button {
-  width: 100%;
+
+  cursor: pointer;
 }
 
 .btn {
+  width: 100%;
   max-width: 250px;
   padding: 24px 0;
   font-size: 24px;
   border-radius: 9999px;
   font-weight: 700;
+  transition: all 600ms ease;
+}
+
+.btn:hover {
+  background-color: #ff642b;
+  color: #fff;
+  box-shadow: 10px 10px 5px 0px rgba(0, 0, 0, 0.71);
+  -webkit-box-shadow: 10px 10px 5px 0px rgba(0, 0, 0, 0.71);
+  -moz-box-shadow: 10px 10px 5px 0px rgba(0, 0, 0, 0.71);
 }
 
 .container {
@@ -99,11 +110,11 @@ nav {
   font-weight: 900;
   padding: 8px;
   color: black;
+  transition: all 300ms ease;
 }
 
 .nav__link:hover {
-  color: #b49d75;
-
+  color: #ff642b;
 }
 
 .nav__list {
@@ -116,7 +127,8 @@ nav {
 input {
   width: 100%;
 }
-form{
+
+form {
   width: 100%;
   margin-left: 48px;
 }
@@ -129,3 +141,89 @@ form{
 
 }
 
+.btn__menu {
+  background-color: transparent;
+  font-size: 32px;
+  border: none;
+  color: black;
+  display: none;
+  transition: all 300ms ease;
+}
+
+.btn__menu:hover {
+  color: #ff642b;
+}
+
+.menu__backdrop {
+  position: absolute;
+  background-color: #242424;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  visibility: hidden;
+  transition: all 300ms ease;
+  opacity: 0;
+  transform: translate(100%);
+}
+
+.menu--open {
+  max-height: 100vh;
+  overflow: hidden;
+}
+
+.menu--open .menu__backdrop {
+  visibility: visible;
+  opacity: 1;
+  transform: translate(0);
+}
+
+.menu__links {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.menu__list {
+  padding: 32px 0;
+}
+
+.menu__link {
+  color: white;
+  font-size: 40px;
+}
+
+.btn__menu--close {
+  position: absolute;
+  top: 10px;
+  right: 20px;
+  padding: 8px;
+  color: white;
+
+}
+
+.btn__menu--close:hover {
+  color: #ff642b;
+}
+
+@media (max-width: 768px) {
+  .btn__menu {
+    display: block;
+  }
+
+  .nav__list {
+    display: none;
+  }
+
+  input {
+    width: 80%;
+  }
+
+  .nav__form {
+    display: none;
+  }
+}

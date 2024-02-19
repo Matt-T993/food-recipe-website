@@ -2,8 +2,8 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import RecipeService from "../service/service";
 import "./pages.css";
-import RecipeBook from "../components/ui/RecipeBook";
-import RecipePage from "../components/ui/RecipePage";
+import Ingredients from "../components/ui/Ingredients";
+import Step from "../components/ui/Step";
 
 const Recipe = () => {
   const [recipe, setRecipe] = useState(null);
@@ -55,6 +55,7 @@ const Recipe = () => {
           <div className="recipe__content">
             <div className="recipe__content--title">
               <h2 className="recipe__content--name">{recipe.strMeal}</h2>
+              <hr />
             </div>
             <img
               src={recipe.strMealThumb}
@@ -65,28 +66,10 @@ const Recipe = () => {
               Area: {recipe.strArea} | Category: {recipe.strCategory} | Tags:{" "}
               {recipe.strTags ? recipe.strTags : "No tags"}
             </p>
+            <hr />
             <div className="recipe__info">
-              <div className="recipe__info--ingredients">
-                <h3 className="recipe__content--subtitle">Ingredients</h3>
-                <ul className="ingredients">
-                  {ingredients.map((ingredient, index) => (
-                    <div className="ingredient__wrapper" key={index}>
-                      <li className="ingredient__item">{ingredient}</li>
-                    </div>
-                  ))}
-                </ul>
-              </div>
-              <div className="recipe__info--steps">
-                <h3 className="recipe__content--subtitle">Instructions</h3>
-                <ol className="steps">
-                  {steps.map((step, index) => (
-                    <li className="step" key={index}>
-                      <span className="number">{index + 1}</span>
-                      {step}
-                    </li>
-                  ))}
-                </ol>
-              </div>
+              <Ingredients recipe={recipe} ingredients={ingredients} />
+              <Step steps={steps} />
             </div>
           </div>
         </div>
