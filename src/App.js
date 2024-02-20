@@ -10,18 +10,18 @@ import RecipeService from "./service/service";
 import SearchRecipes from "./pages/SearchRecipes";
 
 function App() {
-
   const [categories, setCategories] = useState([]);
-
-
-
+  const [loading, setLoading] = useState(true);
 
   const getRecipeCategories = async () => {
     try {
+      setLoading(true);
       const { categories } = await RecipeService.fetchRecipeCategories();
       setCategories(categories);
+      setLoading(false);
     } catch (error) {
       console.error("Error getting recipe categories", error);
+      setLoading(false);
     }
   };
   useEffect(() => {
@@ -34,10 +34,19 @@ function App() {
         <Nav />
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/recipes/:name" element={<Recipes categories={categories} />} />
+          <Route
+            path="/recipes/:name"
+            element={<Recipes categories={categories} />}
+          />
           <Route path="/recipes/:name/:id" element={<Recipe />} />
-          <Route path="/categories" element={<Categories categories={categories}/>}/>
-          <Route path="/search" element={<SearchRecipes categories={categories} />} />
+          <Route
+            path="/categories"
+            element={<Categories categories={categories} />}
+          />
+          <Route
+            path="/search"
+            element={<SearchRecipes categories={categories} />}
+          />
         </Routes>
       </div>
     </Router>

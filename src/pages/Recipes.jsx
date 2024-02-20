@@ -4,17 +4,22 @@ import RecipeService from "../service/service";
 import CategoryChoices from "../components/ui/CategoryChoices";
 import RecipeList from "../components/RecipeList";
 import Select from "../components/ui/Select";
+import { RecipesSkeleton } from "../components/Skeleton";
 
 const Recipes = ({ categories }) => {
   const { name } = useParams();
   const [recipes, setRecipe] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   const getRecipesCategory = async () => {
+    setLoading(true);
     try {
       const { meals } = await RecipeService.fetchRecipesCategory(name);
       setRecipe(meals);
     } catch (error) {
       console.error("Error getting recipes category", error);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -48,9 +53,13 @@ const Recipes = ({ categories }) => {
           <hr />
           <Select filterRecipes={filterRecipes} />
           <div className="recipes">
-            {recipes.map((recipe) => (
-              <RecipeList key={recipe.idMeal} recipe={recipe} />
-            ))}
+            {loading
+              ? Array.from({ length: 4 }, (_, index) => (
+                  <RecipesSkeleton key={index} />
+                ))
+              : recipes.map((recipe) => (
+                  <RecipeList key={recipe.idMeal} recipe={recipe} />
+                ))}
           </div>
         </div>
       </div>

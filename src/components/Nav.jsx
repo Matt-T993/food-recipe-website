@@ -6,6 +6,7 @@ import MenuNav from "./MenuNav";
 
 const Nav = () => {
   const [searchQuery, setSearchQuery] = useState("");
+
   const navigate = useNavigate();
 
   const openMenu = () => {

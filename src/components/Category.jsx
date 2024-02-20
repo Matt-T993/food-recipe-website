@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import Beef from "../assets/foodImage/Beef.jpeg";
 import Chicken from "../assets/foodImage/chicken.jpeg";
@@ -14,6 +14,7 @@ import Vegan from "../assets/foodImage/vegan.jpeg";
 import Vegetarian from "../assets/foodImage/vegetarian.jpeg";
 import Breakfast from "../assets/foodImage/breakfast.jpeg";
 import Goat from "../assets/foodImage/goat.jpeg";
+import { CategorySkeleton } from "./Skeleton";
 
 const categoryImage = (categoryName) => {
   switch (categoryName) {
@@ -51,16 +52,25 @@ const categoryImage = (categoryName) => {
 };
 
 const Category = ({ category }) => {
+  const [loaded, setLoaded] = useState(false);
+
   return (
     <div className="category">
       <Link to={`/recipes/${category.strCategory}`}>
-        <figure className="category__card" key={category.idCategory}>
+        <figure className="category__card">
+          {!loaded && <CategorySkeleton />}
           <img
             src={categoryImage(category.strCategory)}
-            className="categories__img"
-            alt=""
+            className={`categories__img ${loaded ? "is-loaded" : "is-loading"}`}
+            alt={category.strCategory}
+            onLoad={() => setLoaded(true)}
+            style={{ display: loaded ? "block" : "none" }}
           />
-          <p className="category__name">{category.strCategory}</p>
+          {loaded && (
+            <figcaption className="category__name">
+              {category.strCategory}
+            </figcaption>
+          )}
         </figure>
       </Link>
     </div>

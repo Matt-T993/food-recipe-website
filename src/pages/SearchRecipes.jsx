@@ -3,19 +3,22 @@ import { useLocation, useNavigate } from "react-router-dom";
 import RecipeService from "../service/service";
 import RecipeList from "../components/RecipeList";
 import CategoryChoices from "../components/ui/CategoryChoices";
+import NoResults from "../components/ui/NoResults";
+import { RecipesSkeleton } from "../components/Skeleton";
 
 const useQuery = () => {
   return new URLSearchParams(useLocation().search);
 };
 const SearchRecipes = ({ categories }) => {
+  const [recipes, setRecipes] = useState([]);
+  const [loading, setLoading] = useState(true);
   const query = useQuery();
   const searchQuery = query.get("query");
   console.log(searchQuery.length);
-  const navigate = useNavigate();
-  const [recipes, setRecipes] = useState([]);
 
   const fetchSearchResults = async () => {
     if (searchQuery) {
+      setLoading(true);
       try {
         if (searchQuery.length === 1) {
           const { meals } = await RecipeService.fetchSearchRecipes(
@@ -30,6 +33,8 @@ const SearchRecipes = ({ categories }) => {
         }
       } catch (error) {
         console.error("Error fetching search results", error);
+      } finally {
+        setLoading(false);
       }
     }
   };
@@ -46,13 +51,25 @@ const SearchRecipes = ({ categories }) => {
               <CategoryChoices category={category} />
             ))}
           </div>
-          <h1>Search Results for: {searchQuery}</h1>
-          <hr />
-          <div className="recipes">
-            {recipes.map((recipe) => (
-              <RecipeList recipe={recipe} />
-            ))}
-          </div>
+          {recipes.length === 0 ? (
+            <div className="no-result__wrapper">
+              <NoResults />
+            </div>
+          ) : (
+            <>
+              <h1>Search Results for: {searchQuery}</h1>
+              <hr />
+              <div className="recipes">
+                {loading
+                  ? Array.from({ length: 4 }, (_, index) => (
+                      <RecipesSkeleton key={index} />
+                    ))
+                  : recipes.map((recipe) => (
+                      <RecipeList key={recipe.idMeal} recipe={recipe} />
+                    ))}
+              </div>
+            </>
+          )}
         </div>
       </div>
     </header>
