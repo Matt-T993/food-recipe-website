@@ -84,6 +84,8 @@
     align-items: center;
     cursor: pointer;
 
+
+
 }
 
 .categories__img {
@@ -231,9 +233,6 @@
     justify-content: center;
     align-items: center;
     cursor: pointer;
-
-
-
 }
 
 
@@ -423,6 +422,8 @@
 }
 
 .modal-content {
+    width: 90%;
+    max-width: 550px;
     position: relative;
     background: white;
     padding: 40px;
@@ -524,6 +525,8 @@
     .recipe__content--info {
         font-size: 14px;
     }
+ 
+
 
 }
 

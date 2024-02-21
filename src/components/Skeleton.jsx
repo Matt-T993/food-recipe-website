@@ -1,3 +1,5 @@
+
+//Skeleton loader for category 
 export const CategorySkeleton = () => {
   return (
     <div className="skeleton__category--loader">
@@ -7,6 +9,7 @@ export const CategorySkeleton = () => {
   );
 };
 
+//Skeleton loader for recipes 
 export const RecipesSkeleton = () => {
   return (
     <div className="skeleton__recipes--loader">

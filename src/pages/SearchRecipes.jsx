@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import React, { useCallback, useEffect, useState } from "react";
+import { useLocation } from "react-router-dom";
 import RecipeService from "../service/service";
 import RecipeList from "../components/RecipeList";
 import CategoryChoices from "../components/ui/CategoryChoices";
@@ -14,12 +14,13 @@ const SearchRecipes = ({ categories }) => {
   const [loading, setLoading] = useState(true);
   const query = useQuery();
   const searchQuery = query.get("query");
-  console.log(searchQuery.length);
 
-  const fetchSearchResults = async () => {
+  // fetches the search results based on the search query
+  const fetchSearchResults = useCallback(async () => {
     if (searchQuery) {
       setLoading(true);
       try {
+        // check if the search query is exactly one character
         if (searchQuery.length === 1) {
           const { meals } = await RecipeService.fetchSearchRecipes(
             "f=" + searchQuery
@@ -37,10 +38,10 @@ const SearchRecipes = ({ categories }) => {
         setLoading(false);
       }
     }
-  };
+  }, [searchQuery]);
   useEffect(() => {
     fetchSearchResults();
-  }, [searchQuery]);
+  }, [fetchSearchResults]);
 
   return (
     <header id="recipes">

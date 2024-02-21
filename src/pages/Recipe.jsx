@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import RecipeService from "../service/service";
 import "./pages.css";
@@ -23,40 +23,48 @@ const Recipe = () => {
     setShowModal(false);
   };
 
-  // Trigger the modal to open
+  // trigger the modal to open
   const handleOpenModal = () => {
     setShowModal(true);
   };
 
-  const getRecipe = async () => {
+  // get the information a certain recipe
+  const getRecipe = useCallback(async () => {
     try {
       const { meals } = await RecipeService.fetchRecipe(id);
       setRecipe(meals[0]);
     } catch (error) {
       console.error("Error getting recipe", error);
     }
-  };
+  }, [id]);
 
   useEffect(() => {
     getRecipe();
-  }, [id]);
+  }, [getRecipe]);
 
+  // get the ingredient names and their measurements
   const getIngredients = () => {
     const ingredients = [];
     for (let i = 1; i <= 20; i++) {
+      //retrieves the key names for ingredients and measurements based on the current index
       const ingredientKey = `strIngredient${i}`;
       const measureKey = `strMeasure${i}`;
+
+      // check if the current ingredient exists and is not just an empty string
       if (recipe[ingredientKey] && recipe[ingredientKey].trim() !== "") {
         const ingredient =
           `${recipe[measureKey]} ${recipe[ingredientKey]}`.trim();
         ingredients.push(ingredient);
       } else {
+        // stop the loop if empty
         break;
       }
     }
+
     return ingredients;
   };
 
+  // splits instructions into an array and remove extra whitespace.
   const formatInstructions = (instructions) => {
     return instructions.split("\r\n").filter((line) => line.trim() !== "");
   };

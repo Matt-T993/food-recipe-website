@@ -11,17 +11,15 @@ import SearchRecipes from "./pages/SearchRecipes";
 
 function App() {
   const [categories, setCategories] = useState([]);
-  const [loading, setLoading] = useState(true);
 
+
+  // get the recipe categories
   const getRecipeCategories = async () => {
     try {
-      setLoading(true);
       const { categories } = await RecipeService.fetchRecipeCategories();
       setCategories(categories);
-      setLoading(false);
     } catch (error) {
       console.error("Error getting recipe categories", error);
-      setLoading(false);
     }
   };
   useEffect(() => {

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import RecipeService from "../service/service";
 import CategoryChoices from "../components/ui/CategoryChoices";
@@ -11,7 +11,8 @@ const Recipes = ({ categories }) => {
   const [recipes, setRecipe] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  const getRecipesCategory = async () => {
+  // get all the recipes information of a certain category
+  const getRecipesCategory = useCallback(async () => {
     setLoading(true);
     try {
       const { meals } = await RecipeService.fetchRecipesCategory(name);
@@ -21,12 +22,13 @@ const Recipes = ({ categories }) => {
     } finally {
       setLoading(false);
     }
-  };
+  },[name]);
 
   useEffect(() => {
     getRecipesCategory();
-  }, [name]);
+  }, [getRecipesCategory]);
 
+  // filter recipes by accending order and decending order
   const filterRecipes = (filter) => {
     console.log(filter);
     const sortedRecipes = recipes.slice().sort((a, b) => {
