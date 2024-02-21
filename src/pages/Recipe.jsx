@@ -4,10 +4,29 @@ import RecipeService from "../service/service";
 import "./pages.css";
 import Ingredients from "../components/ui/Ingredients";
 import Step from "../components/ui/Step";
+import PacmanLoader from "react-spinners/PacmanLoader";
+import { FcStart } from "react-icons/fc";
+import Modal from "../components/Modal";
 
+const override = {
+  display: "block",
+  margin: "80px auto",
+  color: "red",
+};
 const Recipe = () => {
   const [recipe, setRecipe] = useState(null);
   const { id } = useParams();
+
+  const [showModal, setShowModal] = useState(false);
+
+  const handleCloseModal = () => {
+    setShowModal(false);
+  };
+
+  // Trigger the modal to open
+  const handleOpenModal = () => {
+    setShowModal(true);
+  };
 
   const getRecipe = async () => {
     try {
@@ -43,7 +62,16 @@ const Recipe = () => {
   };
 
   if (!recipe) {
-    return <div>Loading...</div>;
+    return (
+      <PacmanLoader
+        color={"#FFFF00"}
+        className="loading"
+        cssOverride={override}
+        size={50}
+        aria-label="Loading Spinner"
+        data-testid="loader"
+      />
+    );
   }
   const ingredients = getIngredients();
   const steps = formatInstructions(recipe.strInstructions);
@@ -57,11 +85,14 @@ const Recipe = () => {
               <h2 className="recipe__content--name">{recipe.strMeal}</h2>
               <hr />
             </div>
-            <img
-              src={recipe.strMealThumb}
-              className="recipe__content--img"
-              alt=""
-            />
+            <div className="recipe__img--wrapper" onClick={handleOpenModal}>
+              <img
+                src={recipe.strMealThumb}
+                className="recipe__content--img"
+                alt=""
+              />
+              <FcStart className="start__button" />
+            </div>
             <p className="recipe__content--info">
               Area: {recipe.strArea} | Category: {recipe.strCategory} | Tags:{" "}
               {recipe.strTags ? recipe.strTags : "No tags"}
@@ -73,6 +104,9 @@ const Recipe = () => {
             </div>
           </div>
         </div>
+        {showModal && (
+          <Modal recipeVideo={recipe?.strYoutube} onClose={handleCloseModal} />
+        )}
       </div>
     </div>
   );
