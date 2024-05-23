@@ -13,9 +13,6 @@
     max-width: 1200px;
     height: 700px;
     margin: 0 24px;
-    box-shadow: 10px 10px 5px 0px rgba(0, 0, 0, 0.71);
-    -webkit-box-shadow: 10px 10px 5px 0px rgba(0, 0, 0, 0.71);
-    -moz-box-shadow: 10px 10px 5px 0px rgba(0, 0, 0, 0.71);
 }
 
 .home__left {
