@@ -15,6 +15,7 @@ import Vegetarian from "../assets/foodImage/vegetarian.jpeg";
 import Breakfast from "../assets/foodImage/breakfast.jpeg";
 import Goat from "../assets/foodImage/goat.jpeg";
 import { CategorySkeleton } from "./Skeleton";
+import { LazyLoadImage } from "react-lazy-load-image-component";
 
 const categoryImage = (categoryName) => {
   switch (categoryName) {
@@ -59,13 +60,14 @@ const Category = ({ category }) => {
       <Link to={`/recipes/${category.strCategory}`}>
         <figure className="category__card">
           {!loaded && <CategorySkeleton />}
-          <img
+          <LazyLoadImage
             src={categoryImage(category.strCategory)}
-            className={`categories__img ${loaded ? "is-loaded" : "is-loading"}`}
             alt={category.strCategory}
-            onLoad={() => setLoaded(true)}
-            style={{ display: loaded ? "block" : "none" }}
+            className={`categories__img ${loaded ? "is-loaded" : "is-loading"}`}
+            effect="blur"
+            afterLoad={() => setLoaded(true)}
           />
+
           {loaded && (
             <figcaption className="category__name">
               {category.strCategory}
