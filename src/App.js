@@ -1,15 +1,15 @@
 import "./App.css";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import { Suspense, lazy, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import Nav from "./components/Nav";
 import RecipeService from "./service/service";
 
-// Lazy load pages
-const Home = lazy(() => import("./pages/Home"));
-const Recipes = lazy(() => import("./pages/Recipes"));
-const Recipe = lazy(() => import("./pages/Recipe"));
-const Categories = lazy(() => import("./pages/Categories"));
-const SearchRecipes = lazy(() => import("./pages/SearchRecipes"));
+// Directly import pages
+import Home from "./pages/Home";
+import Recipes from "./pages/Recipes";
+import Recipe from "./pages/Recipe";
+import Categories from "./pages/Categories";
+import SearchRecipes from "./pages/SearchRecipes";
 
 function App() {
   const [categories, setCategories] = useState([]);
@@ -18,6 +18,7 @@ function App() {
   const getRecipeCategories = async () => {
     try {
       const { categories } = await RecipeService.fetchRecipeCategories();
+      console.log(categories);
       setCategories(categories);
     } catch (error) {
       console.error("Error getting recipe categories", error);
@@ -32,24 +33,22 @@ function App() {
     <Router>
       <div className="App">
         <Nav />
-        <Suspense fallback={<div className="loading">Loading...</div>}>
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route
-              path="/recipes/:name"
-              element={<Recipes categories={categories} />}
-            />
-            <Route path="/recipes/:name/:id" element={<Recipe />} />
-            <Route
-              path="/categories"
-              element={<Categories categories={categories} />}
-            />
-            <Route
-              path="/search"
-              element={<SearchRecipes categories={categories} />}
-            />
-          </Routes>
-        </Suspense>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route
+            path="/recipes/:name"
+            element={<Recipes categories={categories} />}
+          />
+          <Route path="/recipes/:name/:id" element={<Recipe />} />
+          <Route
+            path="/categories"
+            element={<Categories categories={categories} />}
+          />
+          <Route
+            path="/search"
+            element={<SearchRecipes categories={categories} />}
+          />
+        </Routes>
       </div>
     </Router>
   );
