@@ -144,7 +144,6 @@ input {
 
 form {
   width: 100%;
-  margin-left: 48px;
 }
 
 .searchbar__input {
@@ -176,12 +175,18 @@ form {
   height: 100vh;
   z-index: 100;
   display: flex;
-  align-items: center;
   justify-content: center;
   visibility: hidden;
   transition: all 300ms ease;
   opacity: 0;
   transform: translate(100%);
+  overflow-y: auto;
+}
+
+.menu--open .menu__backdrop {
+  visibility: visible;
+  opacity: 1;
+  transform: translateX(0);
 }
 
 .menu--open {
@@ -199,6 +204,14 @@ form {
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin-top: 100px;
+  width: 80%;
+}
+
+.menu__form {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .menu__list {
@@ -208,6 +221,14 @@ form {
 .menu__link {
   color: white;
   font-size: 40px;
+  margin-bottom: 20px;
+}
+
+.menu__link:hover {
+  color: #ff642b;
+}
+.menu__link--active {
+  color: #ff642b;
 }
 
 .btn__menu--close {
@@ -224,6 +245,44 @@ form {
 }
 
 .btn__menu--close:hover {
+  color: #ff642b;
+}
+
+.menu__sublist {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Not needed anymore, since we'll control visibility with animation */
+.menu__sublist.active {
+  display: block;
+}
+
+.submenu__list {
+  max-height: 0;
+  opacity: 0;
+  overflow: hidden;
+  transition: max-height 0.4s ease, opacity 0.4s ease;
+  display: flex;
+  flex-direction: column;
+  font-size: 32px;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.submenu__list--open {
+  max-height: 700px; /* adjust as needed */
+  opacity: 1;
+}
+
+.submenu__link {
+  color: white;
+  font-size: 32px;
+  transition: color 0.3s ease;
+}
+
+.submenu__link:hover {
   color: #ff642b;
 }
 

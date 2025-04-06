@@ -22,7 +22,7 @@ const Recipes = ({ categories }) => {
     } finally {
       setLoading(false);
     }
-  },[name]);
+  }, [name]);
 
   useEffect(() => {
     getRecipesCategory();

@@ -449,8 +449,11 @@
     background: none;
   }
 
-  .category__choice {
+  /* .category__choice {
     width: calc(100% / 5);
+  } */
+  .category__choices {
+    display: none;
   }
 
   .home__btn {
@@ -501,13 +504,9 @@
     width: 100%;
   }
 
-  .category__choice {
+  /* .category__choice {
     width: calc(100% / 3);
-  }
-
-  .category__name {
-    font-size: 48px;
-  }
+  } */
 
   .recipe__card {
     flex-direction: column;

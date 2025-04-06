@@ -4,7 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { FaBars } from "react-icons/fa";
 import MenuNav from "./MenuNav";
 
-const Nav = () => {
+const Nav = ({ categories }) => {
   const [searchQuery, setSearchQuery] = useState("");
 
   const navigate = useNavigate();
@@ -61,6 +61,7 @@ const Nav = () => {
             handleSearch={handleSearch}
             closeMenu={closeMenu}
             setSearchQuery={setSearchQuery}
+            categories={categories}
           />
         </ul>
       </div>
