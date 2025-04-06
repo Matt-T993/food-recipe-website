@@ -107,6 +107,13 @@ nav {
 .logo__img {
   width: 50px;
 }
+.nav__logo {
+  width: 100%;
+  max-width: 400px;
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
 
 .nav__container {
   width: 100%;
@@ -129,6 +136,11 @@ nav {
 
 .nav__link:hover {
   color: #ff642b;
+}
+.nav__form {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .nav__list {

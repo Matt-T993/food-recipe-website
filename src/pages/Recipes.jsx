@@ -53,7 +53,9 @@ const Recipes = ({ categories }) => {
           </div>
           <h1 className="categories__title">{name}</h1>
           <hr />
-          <Select filterRecipes={filterRecipes} />
+          <div className="filter">
+            <Select filterRecipes={filterRecipes} />
+          </div>
           <div className="recipes">
             {loading
               ? Array.from({ length: 4 }, (_, index) => (

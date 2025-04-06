@@ -243,6 +243,19 @@
   color: #ff642b;
 }
 
+.filter {
+  width: 100%;
+
+  display: flex; /* allow child alignment */
+  justify-content: flex-end; /* push content to the right */
+}
+
+.filter-container {
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+}
+
 /* recipe */
 
 .recipe__content {
@@ -501,7 +514,7 @@
   .category,
   .recipe,
   .skeleton__recipes--loader {
-    width: 100%;
+    width: calc(100% / 2);
   }
 
   /* .category__choice {
@@ -534,10 +547,14 @@
   }
 
   .recipe__info--ingredients {
-    width: 80%;
+    width: 90%;
   }
 
   .recipe__info--steps {
-    width: 80%;
+    width: 90%;
+  }
+
+  .filter-container {
+    max-width: 100px;
   }
 }

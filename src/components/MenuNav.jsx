@@ -74,7 +74,7 @@ const MenuNav = ({
               {categories.map((category, index) => (
                 <li key={index} className="submenu__item">
                   <Link
-                    to={`/categories/${category.strCategory || category}`}
+                    to={`/recipes/${category.strCategory || category}`}
                     className="submenu__link"
                     onClick={handleLinkClick}
                   >

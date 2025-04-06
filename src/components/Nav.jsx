@@ -28,20 +28,22 @@ const Nav = ({ categories }) => {
   return (
     <nav>
       <div className="nav__container">
-        <div className="logo">
-          <Link to={"/"}>
-            <img className="logo__img" src={Logo} alt="" />
-          </Link>
+        <div className="nav__logo">
+          <div className="logo">
+            <Link to={"/"}>
+              <img className="logo__img" src={Logo} alt="" />
+            </Link>
+          </div>
+          <form className="nav__form" onSubmit={handleSearch}>
+            <input
+              className="searchbar__input"
+              type="text"
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              placeholder="Search Recipes..."
+            />
+          </form>
         </div>
-        <form className="nav__form" onSubmit={handleSearch}>
-          <input
-            className="searchbar__input"
-            type="text"
-            value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
-            placeholder="Search Recipes..."
-          />
-        </form>
         <ul className="nav__links">
           <li className="nav__list">
             <Link to="/" className="nav__link">
